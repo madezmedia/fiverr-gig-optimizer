@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8501:8501"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - SCRAPER_API_KEY=${SCRAPER_API_KEY}
+      - FIVERR_API_KEY=${FIVERR_API_KEY}
+    volumes:
+      - ./data:/app/data
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+    # Uncomment below for production with SSL
+    # labels:
+    #   - "traefik.enable=true"
+    #   - "traefik.http.routers.app.rule=Host(`your-domain.com`)"
+    #   - "traefik.http.routers.app.entrypoints=websecure"
+    #   - "traefik.http.routers.app.tls.certresolver=myresolver"
