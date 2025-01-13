@@ -129,7 +129,7 @@ fiverr-gig-optimizer/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/fiverr-gig-optimizer.git
+   git clone https://github.com/madezmedia/fiverr-gig-optimizer.git
    cd fiverr-gig-optimizer
    ```
 
@@ -185,13 +185,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🤝 Contributing
 
-Contributions, issues, and feature requests are welcome! Feel free to check [issues page](https://github.com/yourusername/fiverr-gig-optimizer/issues).
+Contributions, issues, and feature requests are welcome! Feel free to check [issues page](https://github.com/madezmedia/fiverr-gig-optimizer/issues).
 
 ## 👨‍💻 Author
 
-Your Name
-- GitHub: [@yourusername](https://github.com/yourusername)
-- LinkedIn: [Your Name](https://linkedin.com/in/yourprofile)
+MadezMedia
+- GitHub: [@madezmedia](https://github.com/madezmedia)
 
 ---
 
