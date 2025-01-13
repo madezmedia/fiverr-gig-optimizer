@@ -1,0 +1,23 @@
+# Core Dependencies
+streamlit>=1.29.0
+python-dotenv>=1.0.0
+
+# API Integrations
+openai>=1.6.0
+requests>=2.31.0
+
+# Data Processing
+pandas>=2.1.0
+numpy>=1.26.0
+
+# Type Hints
+typing-extensions>=4.8.0
+
+# Development Tools
+black>=23.12.0  # Code formatting
+mypy>=1.7.0    # Type checking
+pylint>=3.0.0  # Code analysis
+pytest>=7.4.0  # Testing
+
+# Documentation
+sphinx>=7.1.0  # Documentation generator
