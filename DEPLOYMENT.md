@@ -1,192 +1,167 @@
-# 🚀 Deployment Guide
+# Deploying Freelance Helper on Elest.io
 
-## Streamlit Cloud Deployment (Recommended)
+This guide provides step-by-step instructions for deploying the Freelance Helper application on Elest.io.
 
-### Why Streamlit Cloud?
-- Free for public repositories
-- Automatic GitHub integration
-- Handles dependencies automatically
-- Built-in SSL/HTTPS
-- Custom subdomain
-- Environment variable management
-- Automatic updates when you push to main
+## Prerequisites
 
-### Steps to Deploy
+1. An account on [Elest.io](https://elest.io)
+2. Your application code pushed to GitHub (https://github.com/madezmedia/freelance-helper)
+3. Required environment variables:
+   - OPENAI_API_KEY
+   - SCRAPER_API_KEY
+   - FIVERR_API_KEY (optional)
 
-1. **Visit Streamlit Cloud**
-   - Go to [share.streamlit.io](https://share.streamlit.io)
-   - Sign in with your GitHub account
+## Deployment Steps
 
-2. **Deploy Your App**
-   - Click "New app"
-   - Select your repository: `madezmedia/fiverr-gig-optimizer`
-   - Select branch: `main`
-   - Set main file path: `src/app.py`
+### 1. Login to Elest.io
 
-3. **Configure Environment Variables**
-   In Streamlit Cloud settings, add these secrets:
-   ```toml
-   OPENAI_API_KEY = "your_openai_api_key"
-   SCRAPER_API_KEY = "your_scraper_api_key"
-   FIVERR_API_KEY = "your_fiverr_api_key"  # Optional
-   ```
+1. Go to [https://elest.io](https://elest.io)
+2. Click on "Login" and authenticate with your account
 
-4. **Advanced Settings**
-   - Python version: 3.11
-   - Memory: Standard (1GB)
-   - Package dependencies: Will be read from requirements.txt
+### 2. Create a New Project
 
-## Alternative Deployment Options
+1. Click on "New Project"
+2. Choose a name for your project (e.g., "freelance-helper")
+3. Select your preferred region
+4. Click "Create Project"
 
-### 1. Docker Deployment
-Create a Dockerfile:
-```dockerfile
-FROM python:3.11-slim
+### 3. Configure Deployment
 
-WORKDIR /app
+1. In your project dashboard, click "Deploy New Service"
+2. Select "Docker Container" as the deployment type
+3. Choose "GitHub" as the source
+4. Select your repository (madezmedia/freelance-helper)
+5. Configure the following settings:
+   - Container Port: 8501
+   - Health Check Path: /_stcore/health
+   - Memory: At least 1GB
+   - CPU: At least 1 vCPU
 
-COPY requirements/requirements.txt .
-RUN pip install -r requirements.txt
+### 4. Configure Environment Variables
 
-COPY . .
+Add the following environment variables in the Elest.io dashboard:
 
-EXPOSE 8501
-
-HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
-
-ENTRYPOINT ["streamlit", "run", "src/app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+```
+OPENAI_API_KEY=your_openai_api_key
+SCRAPER_API_KEY=your_scraper_api_key
+FIVERR_API_KEY=your_fiverr_api_key (optional)
+STREAMLIT_SERVER_PORT=8501
+STREAMLIT_SERVER_ADDRESS=0.0.0.0
+STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
+STREAMLIT_SERVER_ENABLE_CORS=false
+STREAMLIT_SERVER_ENABLE_XSRF_PROTECTION=true
 ```
 
-Deploy using:
-```bash
-docker build -t fiverr-gig-optimizer .
-docker run -p 8501:8501 fiverr-gig-optimizer
-```
+### 5. Deploy the Application
 
-### 2. Heroku Deployment
-1. Create Procfile:
-```
-web: streamlit run src/app.py
-```
+1. Click "Deploy" to start the deployment process
+2. Elest.io will automatically:
+   - Pull your code from GitHub
+   - Build the Docker image using the provided Dockerfile
+   - Start the container with the configured environment variables
+   - Set up SSL/TLS certificate
+   - Configure the load balancer
 
-2. Deploy using Heroku CLI:
-```bash
-heroku create fiverr-gig-optimizer
-heroku git:remote -a fiverr-gig-optimizer
-git push heroku main
-```
+### 6. Verify Deployment
 
-3. Set environment variables:
-```bash
-heroku config:set OPENAI_API_KEY=your_key
-heroku config:set SCRAPER_API_KEY=your_key
-```
+1. Once deployment is complete, click on the provided URL to access your application
+2. Verify that:
+   - The application loads successfully
+   - You can perform profile analysis
+   - API integrations are working
 
-### 3. AWS Elastic Beanstalk
-1. Create requirements.txt at root:
-```bash
-cp requirements/requirements.txt .
-```
+### 7. Monitoring and Maintenance
 
-2. Create .ebextensions/01_streamlit.config:
-```yaml
-option_settings:
-  aws:elasticbeanstalk:application:environment:
-    PYTHONPATH: "/var/app/current:$PYTHONPATH"
-  aws:elasticbeanstalk:container:python:
-    WSGIPath: src/app.py
-```
+Elest.io provides several tools for monitoring your application:
 
-3. Deploy using AWS CLI:
-```bash
-eb init -p python-3.11 fiverr-gig-optimizer
-eb create fiverr-gig-optimizer-env
-```
+1. **Logs**: Access container logs from the dashboard
+2. **Metrics**: Monitor CPU, memory, and network usage
+3. **Health Checks**: View the status of automated health checks
 
-## Production Considerations
+### 8. Automatic Updates
 
-### Security
-- Always use HTTPS
-- Keep API keys secure
-- Implement rate limiting
-- Monitor usage
+To enable automatic updates:
 
-### Performance
-- Enable caching where appropriate
-- Optimize database queries
-- Use CDN for static assets
-- Monitor memory usage
+1. Go to your service settings
+2. Enable "Auto Deploy"
+3. Configure the branch to track (e.g., main)
 
-### Monitoring
-- Set up error tracking
-- Monitor API usage
-- Track user analytics
-- Set up alerts
+This will automatically deploy new versions when you push changes to GitHub.
 
-### Scaling
-- Use load balancing
-- Implement caching
-- Optimize database queries
-- Use CDN for static assets
+## Troubleshooting
 
-## Maintenance
+### Common Issues
 
-### Regular Tasks
-- Update dependencies
-- Monitor error logs
-- Check API usage
-- Backup data
-- Update SSL certificates
+1. **Application Not Starting**
+   - Check the container logs for error messages
+   - Verify all required environment variables are set
+   - Ensure the container has enough memory and CPU resources
 
-### Troubleshooting
-1. Check application logs
-2. Verify API connectivity
-3. Monitor resource usage
-4. Check environment variables
-5. Verify database connections
+2. **API Integration Issues**
+   - Verify API keys are correctly set in environment variables
+   - Check API rate limits
+   - Review application logs for API-related errors
+
+3. **Performance Issues**
+   - Consider scaling up resources (memory/CPU)
+   - Enable caching in the application
+   - Monitor resource usage metrics
+
+### Getting Help
+
+If you encounter issues:
+
+1. Check the application logs in Elest.io dashboard
+2. Review the [Elest.io documentation](https://docs.elest.io)
+3. Contact Elest.io support through their support portal
+
+## Security Considerations
+
+1. **Environment Variables**
+   - Never commit sensitive values to the repository
+   - Use Elest.io's secure environment variable storage
+   - Regularly rotate API keys
+
+2. **Access Control**
+   - Configure IP restrictions if needed
+   - Set up authentication for your application
+   - Regularly review access logs
+
+3. **Updates**
+   - Keep base images updated
+   - Regularly update dependencies
+   - Monitor security advisories
 
 ## Backup and Recovery
 
-### Data Backup
-- Regular state backups
-- Database backups if added
-- Configuration backups
-- Environment variable documentation
+1. **Database Backups**
+   - Configure automated backups if using a database
+   - Test backup restoration procedures
 
-### Recovery Steps
-1. Verify backup integrity
-2. Restore configuration
-3. Restore application state
-4. Verify functionality
-5. Update DNS if needed
-
-## Scaling Considerations
-
-### Vertical Scaling
-- Increase memory
-- Upgrade CPU
-- Expand storage
-
-### Horizontal Scaling
-- Load balancing
-- Multiple instances
-- Database sharding
-- Caching layers
+2. **Application State**
+   - Use persistent storage for important data
+   - Document recovery procedures
 
 ## Cost Optimization
 
-### Free Tier Options
-- Streamlit Cloud (Recommended)
-- Heroku (Limited)
-- AWS Free Tier
+1. **Resource Allocation**
+   - Monitor usage patterns
+   - Adjust resources based on actual needs
+   - Consider using auto-scaling rules
 
-### Paid Options
-- AWS Elastic Beanstalk
-- Google Cloud Run
-- DigitalOcean App Platform
+2. **API Usage**
+   - Monitor API call volumes
+   - Implement caching where possible
+   - Set up usage alerts
 
-Choose based on:
-- Expected traffic
-- Budget constraints
-- Scaling needs
-- Support requirements
+## Maintenance Schedule
+
+1. **Regular Updates**
+   - Schedule dependency updates
+   - Plan maintenance windows
+   - Test updates in staging environment
+
+2. **Monitoring**
+   - Set up alerts for critical metrics
+   - Review logs regularly
+   - Monitor API usage and costs
