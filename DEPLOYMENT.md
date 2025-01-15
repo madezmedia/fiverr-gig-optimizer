@@ -1,11 +1,11 @@
-# Deploying Freelance Helper on Elest.io
+# Deploying Fiverr Gig Optimizer on Elest.io
 
-This guide provides step-by-step instructions for deploying the Freelance Helper application on Elest.io.
+This guide provides step-by-step instructions for deploying the Fiverr Gig Optimizer application on Elest.io.
 
 ## Prerequisites
 
 1. An account on [Elest.io](https://elest.io)
-2. Your application code pushed to GitHub (https://github.com/madezmedia/freelance-helper)
+2. Your application code pushed to GitHub (https://github.com/madezmedia/fiverr-gig-optimizer)
 3. Required environment variables:
    - OPENAI_API_KEY
    - SCRAPER_API_KEY
@@ -21,7 +21,7 @@ This guide provides step-by-step instructions for deploying the Freelance Helper
 ### 2. Create a New Project
 
 1. Click on "New Project"
-2. Choose a name for your project (e.g., "freelance-helper")
+2. Choose a name for your project (e.g., "fiverr-gig-optimizer")
 3. Select your preferred region
 4. Click "Create Project"
 
@@ -30,7 +30,7 @@ This guide provides step-by-step instructions for deploying the Freelance Helper
 1. In your project dashboard, click "Deploy New Service"
 2. Select "Docker Container" as the deployment type
 3. Choose "GitHub" as the source
-4. Select your repository (madezmedia/freelance-helper)
+4. Select your repository (madezmedia/fiverr-gig-optimizer)
 5. Configure the following settings:
    - Container Port: 8501
    - Health Check Path: /_stcore/health
