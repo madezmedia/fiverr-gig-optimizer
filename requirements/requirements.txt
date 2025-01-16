@@ -5,6 +5,7 @@ python-dotenv>=1.0.0
 # API Integrations
 openai>=1.6.0
 requests>=2.31.0
+beautifulsoup4>=4.12.0  # HTML parsing
 
 # Data Processing
 pandas>=2.1.0

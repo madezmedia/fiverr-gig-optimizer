@@ -44,6 +44,8 @@ This guide provides step-by-step instructions for deploying the Fiverr Gig Optim
    - Build Command: `docker build -t fiverr-gig-optimizer .`
    - Start Command: `docker run -p 3001:8080 fiverr-gig-optimizer`
 
+   Note: Ensure the build command completes successfully before running the start command. The image must be built locally before it can be run.
+
 ### 4. Configure Environment Variables
 
 Add the following environment variables in the Elest.io dashboard:
