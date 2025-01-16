@@ -32,7 +32,7 @@ This guide provides step-by-step instructions for deploying the Fiverr Gig Optim
 3. Choose "GitHub" as the source
 4. Select your repository (madezmedia/fiverr-gig-optimizer)
 5. Configure the following settings:
-   - Container Port: 8501
+   - Container Port: 8080
    - Health Check Path: /_stcore/health
    - Memory: At least 1GB
    - CPU: At least 1 vCPU
@@ -45,7 +45,7 @@ Add the following environment variables in the Elest.io dashboard:
 OPENAI_API_KEY=your_openai_api_key
 SCRAPER_API_KEY=your_scraper_api_key
 FIVERR_API_KEY=your_fiverr_api_key (optional)
-STREAMLIT_SERVER_PORT=8501
+STREAMLIT_SERVER_PORT=8080
 STREAMLIT_SERVER_ADDRESS=0.0.0.0
 STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
 STREAMLIT_SERVER_ENABLE_CORS=false
@@ -92,7 +92,12 @@ This will automatically deploy new versions when you push changes to GitHub.
 
 ### Common Issues
 
-1. **Application Not Starting**
+1. **Port Conflicts**
+   - The application now uses port 8080 by default
+   - The port can be overridden using the PORT environment variable
+   - Check if port 8080 is available on the host machine
+
+2. **Application Not Starting**
    - Check the container logs for error messages
    - Verify all required environment variables are set
    - Ensure the container has enough memory and CPU resources
