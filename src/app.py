@@ -16,8 +16,8 @@ if not SCRAPER_API_KEY or not OPENAI_API_KEY:
 
 def main():
     """Main application function that sets up the welcome page."""
-    # Set Streamlit port
-    os.environ['STREAMLIT_SERVER_PORT'] = os.environ.get('PORT', '8080')
+    # Ensure Streamlit uses the correct port
+    os.environ['STREAMLIT_SERVER_PORT'] = '8080'
     
     st.set_page_config(
         page_title="Fiverr Gig Optimizer",

@@ -33,9 +33,16 @@ This guide provides step-by-step instructions for deploying the Fiverr Gig Optim
 4. Select your repository (madezmedia/fiverr-gig-optimizer)
 5. Configure the following settings:
    - Container Port: 8080
+   - Host Port: 3001
+   - Interface: 172.17.0.1
+   - Protocol: HTTP
    - Health Check Path: /_stcore/health
    - Memory: At least 1GB
    - CPU: At least 1 vCPU
+
+6. Docker Configuration:
+   - Build Command: `docker build -t fiverr-gig-optimizer .`
+   - Start Command: `docker run -p 3001:8080 fiverr-gig-optimizer`
 
 ### 4. Configure Environment Variables
 
