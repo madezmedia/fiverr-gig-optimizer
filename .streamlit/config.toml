@@ -1,3 +1,11 @@
+[server]
+port = 8080
+address = "0.0.0.0"
+enableCORS = true
+enableXsrfProtection = true
+maxUploadSize = 200
+maxMessageSize = 200
+
 [theme]
 primaryColor = "#0066cc"
 backgroundColor = "#ffffff"
@@ -8,15 +16,8 @@ font = "sans serif"
 [browser]
 gatherUsageStats = false
 
-[server]
-enableCORS = false
-enableXsrfProtection = true
-maxUploadSize = 200
-maxMessageSize = 200
-
 [runner]
 magicEnabled = true
-fastRerenderEnabled = true
 
 [client]
 showErrorDetails = true
